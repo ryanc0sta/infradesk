@@ -20,6 +20,13 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      // Inter: um nome de família por peso (ver src/theme/fonts.ts). Use font-sans-bold, não font-bold.
+      fontFamily: {
+        sans: ['Inter_400Regular'],
+        'sans-medium': ['Inter_500Medium'],
+        'sans-semibold': ['Inter_600SemiBold'],
+        'sans-bold': ['Inter_700Bold'],
+      },
       // Tokens semânticos (docs/design.md, seção 3). Use estes nomes em vez de cores da paleta.
       colors: {
         background: token('background'),
