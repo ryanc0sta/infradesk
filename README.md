@@ -5,7 +5,7 @@ problemas em ambientes físicos (um encanamento quebrado, uma lâmpada queimada,
 defeito), descrevem e enviam um chamado. A equipe técnica recebe, assume, atualiza o andamento e
 registra a solução com uma foto de "depois".
 
-> **Status:** em desenvolvimento — Etapa 0 (fundação do projeto).
+> **Status:** em desenvolvimento — Etapa 0 (fundação) concluída; próxima: Etapa 1 (design system).
 
 ---
 

@@ -16,6 +16,7 @@ expo-env.d.ts
 *.p8
 *.p12
 *.key
+*.pem
 *.mobileprovision
 
 # Metro
@@ -28,11 +29,10 @@ yarn-error.*
 
 # macOS
 .DS_Store
-*.pem
 
 # local env files
-.env*.local
 .env
+.env*.local
 
 # typescript
 *.tsbuildinfo
@@ -40,3 +40,7 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# Claude Code (arquivos pessoais, não compartilhados)
+CLAUDE.local.md
+.claude/settings.local.json
