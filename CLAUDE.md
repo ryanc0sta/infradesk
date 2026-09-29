@@ -147,12 +147,15 @@ npx prettier --write .      # formatar (atalhos: npm run lint | typecheck | form
 
 ## 10. Estado atual
 
-- **Etapa:** 0 — Fundação (código concluído: PRs #1 e #2 na `main`). Próxima: Etapa 1.
+- **Etapa:** 1 — Design system (a Etapa 0 tem o código concluído; falta a tag).
 - **Feito:** Expo Router com rotas em `src/app/` (`_layout.tsx`, `index.tsx`, `+not-found.tsx`);
   TypeScript (`strict`, atalho `@/` → `src/`); ESLint (`eslint-config-expo`) + Prettier;
   `.env.example`; scheme `infradesk`; `react-dom` + `react-native-web` (app roda também na web);
   recomendações do VSCode em `.vscode/`.
 - **Pendências da Etapa 0:** checkpoint no celular; tag `etapa-0-fundacao`; quadro no GitHub
   Projects com as issues da Etapa 1; definir licença (o `LICENSE` atual é o do template do Expo).
-- **Etapa 1 (próxima):** NativeWind v4 (Tailwind CSS 3) + Reanimated 4/worklets, conforme o guia
-  oficial para o Expo SDK 57. `userInterfaceStyle` passa para `automatic` junto com o tema escuro.
+- **Etapa 1 (em andamento, issues #3–#8, milestone "Etapa 1 — Design system"):**
+  - #3 NativeWind v4 configurado (`tailwind.config.js`, `global.css` importado em
+    `src/app/_layout.tsx`, `babel.config.js`, `metro.config.js`, `nativewind-env.d.ts`);
+    `src/types/env.d.ts` referencia `expo/types` (declara imports `*.css` para o TypeScript 6).
+  - Próximo: #4 tokens de design. `userInterfaceStyle` passa para `automatic` na #5.

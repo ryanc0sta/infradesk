@@ -18,6 +18,8 @@
 | 2026-09 | Fluxo Git: **branch por tarefa → PR → squash merge**          | `main` sempre funcional; histórico limpo e legível                                                                                                                                                                   |
 | 2026-09 | Repositório **público** no GitHub (`infradesk`)               | Portfólio. Licença ainda a definir                                                                                                                                                                                   |
 | 2026-09 | **ESLint (`eslint-config-expo`) + Prettier**; Prettier não formata `.md` | Padrão oficial do Expo; a documentação é escrita à mão e não deve ser reformatada automaticamente |
+| 2026-09 | **NativeWind v4** (Tailwind CSS 3), não a v5 | A v4 é a versão estável indicada no guia oficial; no Expo 57 ela usa Reanimated 4 + `react-native-worklets` |
+| 2026-09 | Tema escuro do NativeWind com `darkMode: 'class'` | Permite a troca manual de tema no Perfil; o modo padrão `media` lança erro na web ("Cannot manually set color scheme") |
 
 ## Pendências de decisão
 

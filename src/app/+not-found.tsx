@@ -1,27 +1,14 @@
 import { Link, Stack } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default function NotFoundScreen() {
   return (
-    <View style={styles.container}>
+    <View className="flex-1 items-center justify-center gap-3 bg-white">
       <Stack.Screen options={{ title: 'Página não encontrada' }} />
-      <Text>Esta tela não existe.</Text>
-      <Link href="/" style={styles.link}>
+      <Text className="text-zinc-700">Esta tela não existe.</Text>
+      <Link href="/" className="text-base text-orange-700 underline">
         Voltar para o início
       </Link>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 12,
-  },
-  link: {
-    fontSize: 16,
-    textDecorationLine: 'underline',
-  },
-});
