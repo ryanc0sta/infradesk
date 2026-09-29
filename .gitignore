@@ -44,3 +44,8 @@ yarn-error.*
 # Claude Code (arquivos pessoais, não compartilhados)
 CLAUDE.local.md
 .claude/settings.local.json
+
+CLAUDE.md
+.claude/
+/docs/
+AGENTS.md
