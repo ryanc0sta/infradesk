@@ -147,11 +147,12 @@ npx prettier --write .      # formatar (atalhos: npm run lint | typecheck | form
 
 ## 10. Estado atual
 
-- **Etapa:** 0 — Fundação (em andamento)
+- **Etapa:** 0 — Fundação (código concluído: PRs #1 e #2 na `main`). Próxima: Etapa 1.
 - **Feito:** Expo Router com rotas em `src/app/` (`_layout.tsx`, `index.tsx`, `+not-found.tsx`);
   TypeScript (`strict`, atalho `@/` → `src/`); ESLint (`eslint-config-expo`) + Prettier;
-  `.env.example`; scheme `infradesk`; `react-dom` + `react-native-web` (suporte à web; o `react-dom` também resolve conflito de
-  dependências do Expo Router).
-- **Pendências:** primeiro commit/PR da etapa; quadro no GitHub Projects com as issues da Etapa 1;
-  definir licença (o `LICENSE` atual é o do template do Expo); `userInterfaceStyle` fica `light` até
-  a Etapa 1.
+  `.env.example`; scheme `infradesk`; `react-dom` + `react-native-web` (app roda também na web);
+  recomendações do VSCode em `.vscode/`.
+- **Pendências da Etapa 0:** checkpoint no celular; tag `etapa-0-fundacao`; quadro no GitHub
+  Projects com as issues da Etapa 1; definir licença (o `LICENSE` atual é o do template do Expo).
+- **Etapa 1 (próxima):** NativeWind v4 (Tailwind CSS 3) + Reanimated 4/worklets, conforme o guia
+  oficial para o Expo SDK 57. `userInterfaceStyle` passa para `automatic` junto com o tema escuro.
