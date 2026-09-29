@@ -16,7 +16,7 @@
 
 ## Etapa 1 — Design system
 
-- [ ] NativeWind configurado (guia oficial da versão atual)
+- [x] NativeWind configurado (guia oficial da versão atual)
 - [ ] Tokens de cor (marca, neutros, status, prioridade) no `tailwind.config.js`
 - [ ] Fonte Inter
 - [ ] Tema claro e escuro
