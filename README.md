@@ -12,6 +12,7 @@ registra a solução com uma foto de "depois".
 ## Funcionalidades
 
 ### Usuário
+
 - Cadastro e login
 - Abrir chamados com até 3 fotos, título, descrição, categoria, local e prioridade
 - Identificar o local por QR Code da sala, busca ou localização
@@ -20,12 +21,14 @@ registra a solução com uma foto de "depois".
 - Comentar e avaliar o atendimento após a conclusão
 
 ### Técnico
+
 - Fila de chamados com abas "Novos", "Meus" e "Atrasados"
 - Prazos (SLA) por prioridade com contagem regressiva
 - Assumir chamados e atualizar o status
 - Concluir com foto de "depois" e descrição do reparo; rejeitar com justificativa
 
 ### Administrador
+
 - Painel com métricas (abertos, atrasados, tempo médio de resolução, avaliação)
 - Ocorrências por categoria e por local
 - Gerenciamento de usuários e papéis
@@ -36,15 +39,15 @@ registra a solução com uma foto de "depois".
 
 ## Stack
 
-| Frente | Tecnologia |
-|---|---|
-| App | [Expo](https://expo.dev) + React Native |
-| Navegação | React Navigation (Native Stack + Bottom Tabs) |
-| Estilização | NativeWind (Tailwind CSS para React Native) |
-| Animações | React Native Reanimated |
-| Ícones | Lucide React Native |
-| Backend | [Supabase](https://supabase.com) (Auth, Postgres, Storage, RLS) |
-| Build e publicação | EAS (Expo Application Services) |
+| Frente             | Tecnologia                                                      |
+| ------------------ | --------------------------------------------------------------- |
+| App                | [Expo](https://expo.dev) + React Native                         |
+| Navegação          | React Navigation (Native Stack + Bottom Tabs)                   |
+| Estilização        | NativeWind (Tailwind CSS para React Native)                     |
+| Animações          | React Native Reanimated                                         |
+| Ícones             | Lucide React Native                                             |
+| Backend            | [Supabase](https://supabase.com) (Auth, Postgres, Storage, RLS) |
+| Build e publicação | EAS (Expo Application Services)                                 |
 
 ---
 
@@ -75,6 +78,14 @@ cp .env.example .env
 npx expo start
 ```
 
+Outros comandos úteis:
+
+```bash
+npm run lint        # ESLint + Prettier
+npm run typecheck   # checagem de tipos do TypeScript
+npm run format      # formata o código com o Prettier
+```
+
 Com o servidor rodando, escaneie o QR Code com o **Expo Go** (Android) ou com a câmera (iOS), ou
 pressione `a` no terminal para abrir no emulador Android.
 
@@ -85,19 +96,18 @@ pressione `a` no terminal para abrir no emulador Android.
 ## Estrutura do projeto
 
 ```
-├── App.js                # componente raiz: providers e navegação
-├── index.js              # ponto de entrada (registra o App)
-├── app.json              # configuração do Expo (nome, ícone, permissões)
+├── app.json              # configuração do Expo (nome, ícone, scheme infradesk://)
 ├── assets/               # ícone, splash e imagens
-├── docs/                 # documentação (design, decisões)
-└── src/                  # código do app (em construção)
-    ├── navigation/       # stacks e abas por papel de usuário
-    ├── screens/          # telas por perfil
-    ├── components/       # componentes reutilizáveis
-    ├── services/         # acesso a dados
-    ├── hooks/
-    └── theme/            # cores e tokens de design
+├── docs/                 # design, modelo de dados, decisões e roteiro
+└── src/
+    └── app/              # rotas do Expo Router (cada arquivo é uma tela)
+        ├── _layout.tsx   # layout raiz (Stack)
+        ├── index.tsx     # tela inicial
+        └── +not-found.tsx
 ```
+
+Nas próximas etapas entram `src/components/`, `src/services/`, `src/mocks/`, `src/hooks/`, `src/lib/`,
+`src/theme/` e `src/types/` (detalhes no [CLAUDE.md](CLAUDE.md)).
 
 ---
 
