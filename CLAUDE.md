@@ -150,7 +150,7 @@ npx prettier --write .      # formatar (atalhos: npm run lint | typecheck | form
 - **Etapa:** 0 — Fundação (em andamento)
 - **Feito:** Expo Router com rotas em `src/app/` (`_layout.tsx`, `index.tsx`, `+not-found.tsx`);
   TypeScript (`strict`, atalho `@/` → `src/`); ESLint (`eslint-config-expo`) + Prettier;
-  `.env.example`; scheme `infradesk`; `react-dom` fixado na versão do SDK (resolve conflito de
+  `.env.example`; scheme `infradesk`; `react-dom` + `react-native-web` (suporte à web; o `react-dom` também resolve conflito de
   dependências do Expo Router).
 - **Pendências:** primeiro commit/PR da etapa; quadro no GitHub Projects com as issues da Etapa 1;
   definir licença (o `LICENSE` atual é o do template do Expo); `userInterfaceStyle` fica `light` até
