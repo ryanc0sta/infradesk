@@ -4,9 +4,9 @@ import { Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useFonts } from 'expo-font';
-import { useColorScheme } from 'nativewind';
+import { colorScheme as nativewindColorScheme, useColorScheme } from 'nativewind';
 import { useEffect } from 'react';
-import { Platform } from 'react-native';
+import { Platform, useColorScheme as useSystemColorScheme } from 'react-native';
 
 import { interFonts } from '@/theme/fonts';
 import { darkNavigationTheme, lightNavigationTheme } from '@/theme/navigation';
@@ -17,16 +17,20 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts(interFonts);
   const { colorScheme } = useColorScheme();
+  const systemColorScheme = useSystemColorScheme();
   const isDark = colorScheme === 'dark';
 
   useEffect(() => {
     if (fontsLoaded || fontError) SplashScreen.hideAsync();
   }, [fontsLoaded, fontError]);
 
-  // Na web, os tokens escuros (`.dark:root` em global.css) só valem com a classe `dark` no <html>.
+  // Na web, com darkMode 'class', o NativeWind começa fixo no tema claro e só aplica os tokens
+  // escuros com a classe `dark` no <html>, que ele mesmo põe e tira ao receber 'dark'/'light'.
+  // Aqui repassamos o tema do sistema. (No celular ele já segue o sistema sozinho.)
   useEffect(() => {
-    if (Platform.OS === 'web') document.documentElement.classList.toggle('dark', isDark);
-  }, [isDark]);
+    if (Platform.OS === 'web')
+      nativewindColorScheme.set(systemColorScheme === 'dark' ? 'dark' : 'light');
+  }, [systemColorScheme]);
 
   if (!fontsLoaded && !fontError) return null;
 
