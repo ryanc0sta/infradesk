@@ -1,4 +1,8 @@
-/** Cria uma cor que lê a variável CSS `--color-<name>` (valores em global.css) e aceita opacidade. */
+const plugin = require('tailwindcss/plugin');
+
+const themeColors = require('./src/theme/colors');
+
+/** Cria uma cor que lê a variável CSS `--color-<name>` e aceita opacidade (`bg-primary/50`). */
 const token = (name) => `rgb(var(--color-${name}) / <alpha-value>)`;
 
 /** Gera o par `<nome>` (fundo) e `<nome>-foreground` (texto) para cada chave. */
@@ -50,6 +54,7 @@ module.exports = {
           DEFAULT: token('danger'),
           foreground: token('danger-foreground'),
         },
+        error: token('error'),
         // bg-status-open + text-status-open-foreground, etc. (nomes do enum ticket_status)
         status: pairs('status', [
           'open',
@@ -69,5 +74,15 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // Gera as variáveis `--color-*` a partir de src/theme/colors.js (fonte única dos tokens).
+    plugin(({ addBase }) => {
+      const toVars = (palette) =>
+        Object.fromEntries(Object.entries(palette).map(([name, rgb]) => [`--color-${name}`, rgb]));
+      addBase({
+        ':root': toVars(themeColors.light),
+        '.dark:root': toVars(themeColors.dark),
+      });
+    }),
+  ],
 };
