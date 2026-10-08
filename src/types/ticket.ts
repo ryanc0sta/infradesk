@@ -1,3 +1,5 @@
+import type { UserRole } from './user';
+
 /**
  * Tipos do domínio de chamados, iguais às tabelas do banco (docs/data-model.md).
  * Na Etapa 6 passam a vir de `database.ts`, gerado pelo Supabase.
@@ -52,6 +54,19 @@ export type TicketPhoto = {
   created_at: string;
 };
 
+/** Linha do tempo do chamado: mudança de status (com ou sem comentário) ou só comentário. */
+export type TicketEvent = {
+  id: number;
+  ticket_id: number;
+  actor_id: string | null;
+  /** Nulo na criação do chamado. */
+  from_status: TicketStatus | null;
+  /** Nulo quando o evento é só um comentário. */
+  to_status: TicketStatus | null;
+  comment: string | null;
+  created_at: string;
+};
+
 /**
  * Imagem pronta para o componente `Image`: um arquivo embutido no app (número devolvido pelo
  * `require`) ou um endereço. Com mocks é sempre o primeiro; na Etapa 7 vira a URL assinada.
@@ -63,4 +78,28 @@ export type TicketListItem = Ticket & {
   location: Location | null;
   category: Category;
   cover: PhotoSource | null;
+};
+
+/** O mínimo de um perfil para exibir quem fez algo: nome e papel. */
+export type Person = {
+  id: string;
+  full_name: string;
+  role: UserRole;
+};
+
+export type TicketPhotoItem = {
+  id: number;
+  kind: PhotoKind;
+  source: PhotoSource;
+};
+
+export type TicketEventItem = TicketEvent & { actor: Person | null };
+
+/** Chamado completo, como aparece na tela de detalhe. */
+export type TicketDetail = TicketListItem & {
+  photos: TicketPhotoItem[];
+  /** Do mais recente para o mais antigo. */
+  events: TicketEventItem[];
+  author: Person | null;
+  assignee: Person | null;
 };

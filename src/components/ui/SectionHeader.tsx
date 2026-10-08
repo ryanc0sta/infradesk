@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Pressable, View } from 'react-native';
 
 import { cn } from '@/lib/cn';
@@ -8,16 +9,19 @@ export type SectionHeaderProps = {
   title: string;
   /** Link à direita, ex.: "Ver todos". */
   action?: { label: string; onPress: () => void };
+  /** Controle extra entre o título e o link, ex.: o alternador de lista/grade. */
+  accessory?: ReactNode;
   className?: string;
 };
 
 /** Título de seção com um link opcional à direita ("Meus chamados" + "Ver todos"). */
-export function SectionHeader({ title, action, className }: SectionHeaderProps) {
+export function SectionHeader({ title, action, accessory, className }: SectionHeaderProps) {
   return (
     <View className={cn('flex-row items-center justify-between gap-3', className)}>
       <Text variant="subtitle" accessibilityRole="header" className="flex-1">
         {title}
       </Text>
+      {accessory}
       {action ? (
         <Pressable
           accessibilityRole="button"

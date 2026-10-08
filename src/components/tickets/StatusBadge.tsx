@@ -4,16 +4,7 @@ import { cn } from '@/lib/cn';
 import { statusLabels } from '@/lib/ticket-labels';
 import type { TicketStatus } from '@/types/ticket';
 
-// As classes ficam escritas por extenso: o Tailwind só gera o que encontra como texto no código,
-// então montar o nome com `bg-status-${status}-dot` não funcionaria.
-const dots = {
-  open: 'bg-status-open-dot',
-  in_review: 'bg-status-in-review-dot',
-  in_progress: 'bg-status-in-progress-dot',
-  done: 'bg-status-done-dot',
-  rejected: 'bg-status-rejected-dot',
-  cancelled: 'bg-status-cancelled-dot',
-} satisfies Record<TicketStatus, string>;
+import { statusDotClasses } from './status-dots';
 
 export type StatusBadgeProps = {
   status: TicketStatus;
@@ -34,7 +25,7 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
         className,
       )}
     >
-      <View className={cn('h-1.5 w-1.5 rounded-full', dots[status])} />
+      <View className={cn('h-1.5 w-1.5 rounded-full', statusDotClasses[status])} />
       <Text className="font-sans-medium text-xs text-foreground">{statusLabels[status]}</Text>
     </View>
   );

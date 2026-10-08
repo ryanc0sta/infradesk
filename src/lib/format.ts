@@ -17,3 +17,17 @@ export function formatLocation(location: Location | null): string {
   if (!location) return 'Local não informado';
   return location.building ? `${location.name}, ${location.building}` : location.name;
 }
+
+const pad = (value: number) => String(value).padStart(2, '0');
+
+/** "08/10/2026". */
+export function formatDate(iso: string): string {
+  const date = new Date(iso);
+  return `${pad(date.getDate())}/${pad(date.getMonth() + 1)}/${date.getFullYear()}`;
+}
+
+/** "08/10/2026 às 14:30". */
+export function formatDateTime(iso: string): string {
+  const date = new Date(iso);
+  return `${formatDate(iso)} às ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
