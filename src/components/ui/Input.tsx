@@ -18,13 +18,13 @@ export function Input({ label, error, className, onFocus, onBlur, ...props }: In
   const [focused, setFocused] = useState(false);
 
   return (
-    <View className={cn('gap-1.5', className)}>
+    <View className={cn('gap-2', className)}>
       <Text variant="label">{label}</Text>
       <TextInput
         accessibilityLabel={label}
         placeholderTextColor={colors['muted-foreground']}
         className={cn(
-          'min-h-11 rounded-xl border bg-surface px-4 py-2.5 font-sans text-base text-foreground',
+          'min-h-12 rounded-2xl border bg-surface px-4 py-3 font-sans text-base text-foreground',
           error ? 'border-error' : focused ? 'border-accent' : 'border-border',
         )}
         onFocus={(event) => {

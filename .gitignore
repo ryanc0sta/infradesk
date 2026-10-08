@@ -49,3 +49,6 @@ CLAUDE.md
 .claude/
 /docs/
 AGENTS.md
+
+# Protótipo de referência (imagens grandes, só local)
+selected-frames/

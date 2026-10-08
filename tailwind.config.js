@@ -31,6 +31,10 @@ module.exports = {
         'sans-semibold': ['Inter_600SemiBold'],
         'sans-bold': ['Inter_700Bold'],
       },
+      // Cantos dos cards do protótipo (28 px); botões e chips usam rounded-full (pílula).
+      borderRadius: {
+        '4xl': '28px',
+      },
       // Tokens semânticos (docs/design.md, seção 3). Use estes nomes em vez de cores da paleta.
       colors: {
         background: token('background'),
@@ -50,27 +54,29 @@ module.exports = {
           DEFAULT: token('accent'),
           soft: token('accent-soft'),
         },
+        // Verde-azulado: só para "concluído" e sucesso. bg-success (ícones, barras),
+        // bg-success-soft (fundos) e text-success-text (texto).
+        success: {
+          DEFAULT: token('success'),
+          soft: token('success-soft'),
+          text: token('success-text'),
+        },
         danger: {
           DEFAULT: token('danger'),
           foreground: token('danger-foreground'),
         },
         error: token('error'),
         // bg-status-open + text-status-open-foreground, etc. (nomes do enum ticket_status)
-        status: pairs('status', [
-          'open',
-          'in-review',
-          'in-progress',
-          'done',
-          'rejected',
-          'cancelled',
-        ]),
-        // text-priority-critical, etc. (nomes do enum ticket_priority)
-        priority: {
-          low: token('priority-low'),
-          medium: token('priority-medium'),
-          high: token('priority-high'),
-          critical: token('priority-critical'),
-        },
+        status: pairs('status', ['open', 'in-review', 'in-progress', 'done', 'rejected']),
+        // Selo sólido: bg-priority-high + text-priority-high-foreground.
+        // Sem fundo: text-priority-high-text. (nomes do enum ticket_priority)
+        priority: Object.fromEntries(
+          ['low', 'medium', 'high', 'critical'].flatMap((key) => [
+            [key, token(`priority-${key}`)],
+            [`${key}-foreground`, token(`priority-${key}-foreground`)],
+            [`${key}-text`, token(`priority-${key}-text`)],
+          ]),
+        ),
       },
     },
   },

@@ -8,14 +8,26 @@ import { Text, type TextProps } from './Text';
 
 const variants = {
   primary: { container: 'bg-primary', tone: 'inverse', color: 'primary-foreground' },
-  secondary: { container: 'border border-border bg-surface', tone: 'default', color: 'foreground' },
-  ghost: { container: 'bg-transparent', tone: 'brand', color: 'brand' },
+  // Contorno marrom sobre fundo transparente ("Assumir", "Adicionar foto").
+  secondary: { container: 'border border-foreground', tone: 'default', color: 'foreground' },
+  ghost: { container: '', tone: 'brand', color: 'brand' },
   destructive: { container: 'bg-danger', tone: 'inverse', color: 'danger-foreground' },
 } satisfies Record<string, { container: string; tone: TextProps['tone']; color: ColorToken }>;
+
+const sizes = {
+  // 36 px visíveis; o hitSlop completa os 44 px de área de toque.
+  sm: { container: 'min-h-9 gap-1.5 px-4', text: 'buttonSmall', icon: 16, hitSlop: 4 },
+  md: { container: 'min-h-12 gap-2 px-6', text: 'button', icon: 18, hitSlop: 0 },
+  lg: { container: 'min-h-14 gap-2 px-7', text: 'button', icon: 20, hitSlop: 0 },
+} satisfies Record<
+  string,
+  { container: string; text: TextProps['variant']; icon: number; hitSlop: number }
+>;
 
 export type ButtonProps = Omit<PressableProps, 'children'> & {
   title: string;
   variant?: keyof typeof variants;
+  size?: keyof typeof sizes;
   /** Ícone do Lucide exibido antes do texto. */
   icon?: LucideIcon;
   loading?: boolean;
@@ -25,6 +37,7 @@ export type ButtonProps = Omit<PressableProps, 'children'> & {
 export function Button({
   title,
   variant = 'primary',
+  size = 'md',
   icon: Icon,
   loading = false,
   disabled,
@@ -33,6 +46,7 @@ export function Button({
 }: ButtonProps) {
   const colors = useThemeColors();
   const style = variants[variant];
+  const dimensions = sizes[size];
   const isDisabled = disabled || loading;
 
   return (
@@ -40,9 +54,10 @@ export function Button({
       accessibilityRole="button"
       accessibilityState={{ disabled: isDisabled, busy: loading }}
       disabled={isDisabled}
+      hitSlop={dimensions.hitSlop}
       className={cn(
-        // min-h-11 = 44 px, o alvo de toque mínimo do design.
-        'min-h-11 flex-row items-center justify-center gap-2 rounded-2xl px-5 active:opacity-80',
+        'flex-row items-center justify-center rounded-full active:opacity-80',
+        dimensions.container,
         style.container,
         isDisabled && 'opacity-50',
         className,
@@ -52,9 +67,9 @@ export function Button({
       {loading ? (
         <ActivityIndicator size="small" color={colors[style.color]} />
       ) : (
-        Icon && <Icon size={18} color={colors[style.color]} />
+        Icon && <Icon size={dimensions.icon} color={colors[style.color]} />
       )}
-      <Text variant="button" tone={style.tone}>
+      <Text variant={dimensions.text} tone={style.tone}>
         {title}
       </Text>
     </Pressable>
