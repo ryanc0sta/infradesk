@@ -29,7 +29,7 @@ export function Chip({
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityState={{ selected }}
+      aria-selected={selected}
       accessibilityLabel={count === undefined ? label : `${label}, ${count}`}
       className={cn(
         'min-h-11 flex-row items-center gap-2 rounded-full border px-5 active:opacity-80',

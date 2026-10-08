@@ -29,7 +29,9 @@ export function ProgressBar({ label, value, tone = 'medium', className }: Progre
       accessible
       accessibilityRole="progressbar"
       accessibilityLabel={label}
-      accessibilityValue={{ min: 0, max: 100, now: percent }}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={percent}
       className={cn('gap-2', className)}
     >
       <View className="flex-row items-center justify-between gap-3">

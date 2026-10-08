@@ -35,7 +35,7 @@ export function IconButton({
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityState={{ disabled: !!disabled }}
+      aria-disabled={!!disabled}
       disabled={disabled}
       className={cn(
         'h-11 w-11 items-center justify-center rounded-full active:opacity-70',
