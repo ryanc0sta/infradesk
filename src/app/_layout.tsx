@@ -9,6 +9,7 @@ import { colorScheme as nativewindColorScheme, useColorScheme } from 'nativewind
 import { useEffect } from 'react';
 import { Platform, useColorScheme as useSystemColorScheme } from 'react-native';
 
+import { WebFrame } from '@/components/navigation/WebFrame';
 import { queryClient } from '@/lib/query-client';
 import { useSession } from '@/lib/session';
 import { interFonts } from '@/theme/fonts';
@@ -43,17 +44,19 @@ export default function RootLayout() {
     // Entrega o cliente de dados (cache e buscas) a todas as telas.
     <QueryClientProvider client={queryClient}>
       <ThemeProvider value={isDark ? darkNavigationTheme : lightNavigationTheme}>
-        <Stack>
-          {/* Stack.Protected é um "porteiro": com `guard` falso, as telas de dentro ficam
-            inacessíveis e o app leva a pessoa para a primeira tela disponível. */}
-          <Stack.Protected guard={isSignedIn}>
-            <Stack.Screen name="(app)" options={{ headerShown: false }} />
-          </Stack.Protected>
-          <Stack.Protected guard={!isSignedIn}>
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          </Stack.Protected>
-          <Stack.Screen name="showcase" />
-        </Stack>
+        <WebFrame>
+          <Stack>
+            {/* Stack.Protected é um "porteiro": com `guard` falso, as telas de dentro ficam
+              inacessíveis e o app leva a pessoa para a primeira tela disponível. */}
+            <Stack.Protected guard={isSignedIn}>
+              <Stack.Screen name="(app)" options={{ headerShown: false }} />
+            </Stack.Protected>
+            <Stack.Protected guard={!isSignedIn}>
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            </Stack.Protected>
+            <Stack.Screen name="showcase" />
+          </Stack>
+        </WebFrame>
         <StatusBar style="auto" />
       </ThemeProvider>
     </QueryClientProvider>
