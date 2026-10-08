@@ -4,7 +4,7 @@ import { cn } from '@/lib/cn';
 
 import { Text } from './Text';
 
-// Intensidades da rampa laranja, para barras lado a lado sem recorrer a outras cores.
+// Três intensidades para barras lado a lado, mais o verde de sucesso.
 const tones = {
   strong: 'bg-primary',
   medium: 'bg-accent',
@@ -32,17 +32,17 @@ export function ProgressBar({ label, value, tone = 'medium', className }: Progre
       aria-valuemin={0}
       aria-valuemax={100}
       aria-valuenow={percent}
-      className={cn('gap-2', className)}
+      className={cn('gap-1.5', className)}
     >
       <View className="flex-row items-center justify-between gap-3">
         <Text variant="label" className="flex-1">
           {label}
         </Text>
-        <Text variant="label" tone="muted">
+        <Text variant="label" tone="muted" tabular>
           {percent}%
         </Text>
       </View>
-      <View className="h-2.5 overflow-hidden rounded-full bg-surface-muted">
+      <View className="h-1.5 overflow-hidden rounded-full bg-surface-muted">
         {/* A largura muda a cada valor, então vai em `style`: classes do Tailwind são fixas. */}
         <View className={cn('h-full rounded-full', tones[tone])} style={{ width: `${percent}%` }} />
       </View>

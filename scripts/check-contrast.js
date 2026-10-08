@@ -17,10 +17,13 @@ const contrast = (a, b) => {
   return (lighter + 0.05) / (darker + 0.05);
 };
 
-const statuses = ['open', 'in-review', 'in-progress', 'done', 'rejected'];
+const statuses = ['open', 'in-review', 'in-progress', 'done', 'rejected', 'cancelled'];
 const priorities = ['low', 'medium', 'high', 'critical'];
 const TEXT = 4.5;
 const GRAPHIC = 3;
+// O ponto do status acompanha um rótulo escrito, então não carrega a informação sozinho:
+// basta ser distinguível do fundo do selo.
+const DECORATIVE = 1.3;
 
 // [cor da frente, cor de fundo, mínimo]
 const pairs = [
@@ -34,17 +37,18 @@ const pairs = [
   ['brand', 'accent-soft', TEXT],
   ['foreground', 'accent-soft', TEXT],
   ['success-text', 'success-soft', TEXT],
+  ['error', 'danger-soft', TEXT],
   ['primary-foreground', 'primary', TEXT],
   ['danger-foreground', 'danger', TEXT],
   ['overlay-foreground', 'overlay', TEXT],
+  // Chip selecionado: fundo na cor do texto, texto na cor do fundo.
+  ['background', 'foreground', TEXT],
   ['primary-foreground', 'accent', GRAPHIC],
   ['accent', 'surface', GRAPHIC],
   ['accent', 'background', GRAPHIC],
-  ['accent', 'accent-soft', GRAPHIC],
   ['success', 'surface', GRAPHIC],
   ['success', 'success-soft', GRAPHIC],
-  ['error', 'status-rejected', GRAPHIC],
-  ...statuses.map((status) => [`status-${status}-foreground`, `status-${status}`, TEXT]),
+  ...statuses.map((status) => [`status-${status}-dot`, 'surface-muted', DECORATIVE]),
   ...priorities.flatMap((priority) => [
     [`priority-${priority}-foreground`, `priority-${priority}`, TEXT],
     [`priority-${priority}-text`, 'surface', TEXT],

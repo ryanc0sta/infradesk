@@ -32,7 +32,7 @@ export function Skeleton({ className }: SkeletonProps) {
 
   return (
     <Animated.View style={animatedStyle} accessibilityElementsHidden importantForAccessibility="no">
-      <View className={cn('rounded-lg bg-border', className)} />
+      <View className={cn('rounded-md bg-border', className)} />
     </Animated.View>
   );
 }

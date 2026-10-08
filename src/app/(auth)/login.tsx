@@ -25,10 +25,10 @@ export default function LoginScreen() {
   }
 
   return (
-    <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-6 p-6">
+    <ScrollView className="flex-1 bg-background" contentContainerClassName="gap-5 p-4">
       <View className="gap-1">
         <Text variant="title">Entrar como</Text>
-        <Text tone="muted">
+        <Text variant="label" tone="muted">
           Login de demonstração: escolha um papel para ver o app com os olhos dele.
         </Text>
       </View>

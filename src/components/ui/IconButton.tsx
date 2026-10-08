@@ -21,7 +21,7 @@ export type IconButtonProps = Omit<PressableProps, 'children'> & {
   className?: string;
 };
 
-/** Botão redondo só com ícone, com 44 px de área de toque. */
+/** Botão quadrado de cantos suaves só com ícone, com 44 px de área de toque. */
 export function IconButton({
   icon: Icon,
   variant = 'ghost',
@@ -37,15 +37,17 @@ export function IconButton({
       accessibilityRole="button"
       aria-disabled={!!disabled}
       disabled={disabled}
+      // 40 px visíveis + 2 px de cada lado = 44 px de área de toque.
+      hitSlop={2}
       className={cn(
-        'h-11 w-11 items-center justify-center rounded-full active:opacity-70',
+        'h-10 w-10 items-center justify-center rounded-lg active:opacity-70',
         style.container,
         disabled && 'opacity-50',
         className,
       )}
       {...props}
     >
-      <Icon size={22} color={colors[style.color]} />
+      <Icon size={20} color={colors[style.color]} />
     </Pressable>
   );
 }

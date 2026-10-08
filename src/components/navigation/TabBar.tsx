@@ -10,8 +10,8 @@ import { rolesWithScanButton, type TabName, tabs } from '@/lib/tabs';
 import { useThemeColors } from '@/theme/useThemeColors';
 
 /**
- * Barra de abas do protótipo: branca, com ícone e rótulo; a aba ativa fica na cor da marca.
- * Para técnico e admin, um botão redondo de QR Code fica no meio, entre as abas.
+ * Barra de abas: superfície neutra com borda fina, ícone e rótulo; só a aba ativa leva a cor
+ * da marca. Para técnico e admin, o botão de QR Code fica no meio, entre as abas.
  *
  * O navegador de abas entrega aqui o estado (quais abas existem e qual está ativa) e a função
  * de navegar; este componente só decide como desenhar.
@@ -57,10 +57,10 @@ export function TabBar({ state, navigation, insets }: BottomTabBarProps) {
                   accessibilityRole="button"
                   accessibilityLabel="Escanear QR Code"
                   onPress={() => router.push('/scan')}
-                  // -mt-6 ergue o botão para fora da barra, como no protótipo.
-                  className="-mt-6 h-16 w-16 items-center justify-center rounded-full bg-accent shadow-lg active:opacity-80"
+                  // -mt-5 ergue o botão para fora da barra, como no protótipo.
+                  className="-mt-5 h-14 w-14 items-center justify-center rounded-2xl bg-primary shadow-md active:opacity-80"
                 >
-                  <QrCode size={28} color={colors['primary-foreground']} />
+                  <QrCode size={24} color={colors['primary-foreground']} />
                 </Pressable>
               </View>
             ) : null}
@@ -69,17 +69,17 @@ export function TabBar({ state, navigation, insets }: BottomTabBarProps) {
               aria-selected={focused}
               accessibilityLabel={tab.label}
               onPress={onPress}
-              className="min-h-16 flex-1 items-center justify-center gap-1 py-2 active:opacity-70"
+              className="min-h-14 flex-1 items-center justify-center gap-1 py-1.5 active:opacity-70"
             >
               <Icon
-                size={24}
+                size={22}
                 color={focused ? colors.brand : colors['muted-foreground']}
-                strokeWidth={focused ? 2.5 : 2}
+                strokeWidth={focused ? 2.25 : 1.75}
               />
               {/* Text do React Native: a cor depende de a aba estar ativa, não de um `tone`. */}
               <Text
                 className={cn(
-                  'font-sans-semibold text-xs',
+                  'font-sans-medium text-[11px]',
                   focused ? 'text-brand' : 'text-muted-foreground',
                 )}
               >
