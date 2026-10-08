@@ -1,26 +1,114 @@
 import { router } from 'expo-router';
-import { House } from 'lucide-react-native';
-import { View } from 'react-native';
+import { CloudOff, Inbox, ListFilter } from 'lucide-react-native';
+import { useMemo, useState } from 'react';
+import { FlatList, RefreshControl, ScrollView, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { PlaceholderScreen } from '@/components/dev/PlaceholderScreen';
-import { Button, FAB } from '@/components/ui';
-import { sampleTicketId } from '@/lib/config';
+import { TicketCard, TicketCardSkeleton } from '@/components/tickets';
+import { Chip, EmptyState, FAB, SectionHeader, Text } from '@/components/ui';
+import { useMyTickets } from '@/hooks/useMyTickets';
+import { useSession } from '@/lib/session';
+import { matchesFilter, type TicketFilterKey, ticketFilters } from '@/lib/ticket-filters';
+import { useThemeColors } from '@/theme/useThemeColors';
 
 export default function HomeScreen() {
-  return (
-    <View className="flex-1">
-      <PlaceholderScreen
-        icon={House}
-        title="Início"
-        description="Seus chamados, com filtros por status, chegam na Etapa 3."
+  const colors = useThemeColors();
+  const { profile } = useSession();
+  const { data: tickets, isPending, isError, refetch, isRefetching } = useMyTickets();
+  const [filter, setFilter] = useState<TicketFilterKey>('all');
+
+  // useMemo guarda o resultado e só refaz a conta quando a lista ou o filtro mudam.
+  const visibleTickets = useMemo(
+    () => (tickets ?? []).filter((ticket) => matchesFilter(ticket.status, filter)),
+    [tickets, filter],
+  );
+  const firstName = profile?.full_name.split(' ')[0] ?? '';
+
+  const header = (
+    <View className="gap-6 pb-4">
+      <View className="gap-1">
+        <Text variant="display">Olá, {firstName}</Text>
+        <Text tone="muted">Como podemos ajudar hoje?</Text>
+      </View>
+
+      {/* -mx-6 e px-6: a fileira de filtros rola de ponta a ponta da tela, sem cortar na margem. */}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        className="-mx-6"
+        contentContainerClassName="gap-2 px-6"
       >
-        <Button
-          title={`Abrir o chamado #${sampleTicketId}`}
-          variant="secondary"
-          onPress={() => router.push(`/tickets/${sampleTicketId}`)}
-        />
-      </PlaceholderScreen>
-      <FAB accessibilityLabel="Novo chamado" onPress={() => router.push('/tickets/new')} />
+        {ticketFilters.map((item) => (
+          <Chip
+            key={item.key}
+            label={item.label}
+            count={tickets?.filter((ticket) => matchesFilter(ticket.status, item.key)).length}
+            selected={filter === item.key}
+            onPress={() => setFilter(item.key)}
+          />
+        ))}
+      </ScrollView>
+
+      <SectionHeader
+        title="Meus chamados"
+        action={{ label: 'Ver todos', onPress: () => router.push('/search') }}
+      />
     </View>
+  );
+
+  // O que aparece no lugar da lista quando não há cards para mostrar.
+  const empty = isPending ? (
+    <View className="gap-4" accessibilityLabel="Carregando chamados">
+      <TicketCardSkeleton />
+      <TicketCardSkeleton />
+      <TicketCardSkeleton />
+    </View>
+  ) : isError ? (
+    <EmptyState
+      icon={CloudOff}
+      title="Não foi possível carregar"
+      description="Confira a conexão e tente de novo."
+      action={{ label: 'Tentar novamente', onPress: () => refetch() }}
+    />
+  ) : tickets?.length ? (
+    <EmptyState
+      icon={ListFilter}
+      title="Nada neste filtro"
+      description="Você não tem chamados nesta situação."
+      action={{ label: 'Ver todos', onPress: () => setFilter('all') }}
+    />
+  ) : (
+    <EmptyState
+      icon={Inbox}
+      title="Nenhum chamado ainda"
+      description="Viu um problema? Fotografe e avise a equipe."
+      action={{ label: 'Abrir chamado', onPress: () => router.push('/tickets/new') }}
+    />
+  );
+
+  return (
+    <SafeAreaView edges={['top']} className="flex-1 bg-background">
+      {/* FlatList só desenha os cards que estão na tela, o que mantém listas longas leves. */}
+      <FlatList
+        data={visibleTickets}
+        keyExtractor={(ticket) => String(ticket.id)}
+        renderItem={({ item }) => (
+          <TicketCard ticket={item} onPress={() => router.push(`/tickets/${item.id}`)} />
+        )}
+        ListHeaderComponent={header}
+        ListEmptyComponent={empty}
+        ItemSeparatorComponent={() => <View className="h-4" />}
+        contentContainerClassName="p-6 pb-32"
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefetching}
+            onRefresh={() => refetch()}
+            tintColor={colors.accent}
+            colors={[colors.accent]}
+          />
+        }
+      />
+      <FAB accessibilityLabel="Novo chamado" onPress={() => router.push('/tickets/new')} />
+    </SafeAreaView>
   );
 }
