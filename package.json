@@ -31,7 +31,8 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "contrast": "node scripts/check-contrast.js"
   },
   "private": true,
   "devDependencies": {

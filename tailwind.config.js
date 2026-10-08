@@ -61,6 +61,11 @@ module.exports = {
           soft: token('success-soft'),
           text: token('success-text'),
         },
+        // Fundo escuro translúcido para elementos sobre fotos (bg-overlay/60).
+        overlay: {
+          DEFAULT: token('overlay'),
+          foreground: token('overlay-foreground'),
+        },
         danger: {
           DEFAULT: token('danger'),
           foreground: token('danger-foreground'),
