@@ -36,6 +36,10 @@ module.exports = {
     'success-soft': '238 247 243', // #EEF7F3: fundos de destaque
     'success-text': '27 110 100', // #1B6E64: texto (o teal do protótipo dá só 3,3:1)
 
+    // Sobre fotos: fundo escuro translúcido (usar com opacidade, ex.: bg-overlay/60) e texto claro
+    overlay: '28 22 18', // #1C1612
+    'overlay-foreground': '255 255 255',
+
     // Ações destrutivas e erros
     danger: '185 28 28', // #B91C1C
     'danger-foreground': '255 255 255',
@@ -87,6 +91,9 @@ module.exports = {
     success: '52 172 157', // #34AC9D
     'success-soft': '24 54 49', // #183631
     'success-text': '94 205 190', // #5ECDBE
+
+    overlay: '28 22 18', // igual ao claro: a foto não muda com o tema
+    'overlay-foreground': '255 255 255',
 
     danger: '220 38 38', // #DC2626
     'danger-foreground': '255 255 255',

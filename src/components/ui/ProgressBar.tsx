@@ -1,0 +1,49 @@
+import { View } from 'react-native';
+
+import { cn } from '@/lib/cn';
+
+import { Text } from './Text';
+
+// Intensidades da rampa laranja, para barras lado a lado sem recorrer a outras cores.
+const tones = {
+  strong: 'bg-primary',
+  medium: 'bg-accent',
+  soft: 'bg-priority-medium',
+  success: 'bg-success',
+} as const;
+
+export type ProgressBarProps = {
+  label: string;
+  /** Fração de 0 a 1. */
+  value: number;
+  tone?: keyof typeof tones;
+  className?: string;
+};
+
+/** Barra horizontal com rótulo e porcentagem, feita só com `View` (ex.: ocorrências por categoria). */
+export function ProgressBar({ label, value, tone = 'medium', className }: ProgressBarProps) {
+  const percent = Math.round(Math.min(Math.max(value, 0), 1) * 100);
+
+  return (
+    <View
+      accessible
+      accessibilityRole="progressbar"
+      accessibilityLabel={label}
+      accessibilityValue={{ min: 0, max: 100, now: percent }}
+      className={cn('gap-2', className)}
+    >
+      <View className="flex-row items-center justify-between gap-3">
+        <Text variant="label" className="flex-1">
+          {label}
+        </Text>
+        <Text variant="label" tone="muted">
+          {percent}%
+        </Text>
+      </View>
+      <View className="h-2.5 overflow-hidden rounded-full bg-surface-muted">
+        {/* A largura muda a cada valor, então vai em `style`: classes do Tailwind são fixas. */}
+        <View className={cn('h-full rounded-full', tones[tone])} style={{ width: `${percent}%` }} />
+      </View>
+    </View>
+  );
+}
