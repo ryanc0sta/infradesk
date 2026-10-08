@@ -5,7 +5,7 @@ import { cn } from '@/lib/cn';
 const sizes = {
   sm: { box: 'h-8 w-8', text: 'text-xs' },
   md: { box: 'h-10 w-10', text: 'text-sm' },
-  lg: { box: 'h-14 w-14', text: 'text-lg' },
+  lg: { box: 'h-12 w-12', text: 'text-base' },
 } as const;
 
 export type AvatarProps = {
@@ -43,11 +43,11 @@ export function Avatar({ name, uri, size = 'md', className }: AvatarProps) {
       accessibilityLabel={name}
       className={cn(
         style.box,
-        'items-center justify-center rounded-full bg-accent-soft',
+        'items-center justify-center rounded-full bg-surface-muted',
         className,
       )}
     >
-      <Text className={cn('font-sans-semibold text-brand', style.text)}>{initials(name)}</Text>
+      <Text className={cn('font-sans-semibold text-foreground', style.text)}>{initials(name)}</Text>
     </View>
   );
 }

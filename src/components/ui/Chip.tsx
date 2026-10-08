@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react-native';
-import { Pressable, type PressableProps, Text as RNText, View } from 'react-native';
+import { Pressable, type PressableProps } from 'react-native';
 
 import { cn } from '@/lib/cn';
 import { useThemeColors } from '@/theme/useThemeColors';
@@ -15,7 +15,10 @@ export type ChipProps = Omit<PressableProps, 'children'> & {
   className?: string;
 };
 
-/** Opção selecionável em pílula (filtros de status, categorias): laranja quando selecionada. */
+/**
+ * Opção selecionável compacta (filtros de status, categorias). A selecionada inverte as cores
+ * (fundo na cor do texto), sem usar a cor da marca: ela fica reservada à ação principal.
+ */
 export function Chip({
   label,
   selected = false,
@@ -31,36 +34,28 @@ export function Chip({
       accessibilityRole="button"
       aria-selected={selected}
       accessibilityLabel={count === undefined ? label : `${label}, ${count}`}
+      // 32 px visíveis + 6 px de cada lado = 44 px de área de toque.
+      hitSlop={6}
       className={cn(
-        'min-h-11 flex-row items-center gap-2 rounded-full border px-5 active:opacity-80',
-        selected ? 'border-primary bg-primary' : 'border-border bg-surface',
+        'h-8 flex-row items-center gap-1.5 rounded-lg border px-3 active:opacity-80',
+        selected ? 'border-foreground bg-foreground' : 'border-border bg-surface',
         className,
       )}
       {...props}
     >
-      {Icon && (
-        <Icon size={16} color={selected ? colors['primary-foreground'] : colors.foreground} />
-      )}
-      <Text variant="buttonSmall" tone={selected ? 'inverse' : 'default'}>
+      {Icon && <Icon size={14} color={selected ? colors.background : colors['muted-foreground']} />}
+      <Text variant="buttonSmall" tone={selected ? 'contrast' : 'default'}>
         {label}
       </Text>
       {count !== undefined && (
-        <View
-          className={cn(
-            'min-w-6 items-center rounded-full px-1.5 py-0.5',
-            selected ? 'bg-primary-foreground/25' : 'bg-surface-muted',
-          )}
+        <Text
+          variant="buttonSmall"
+          tone={selected ? 'contrast' : 'muted'}
+          tabular
+          className={selected ? 'opacity-70' : undefined}
         >
-          {/* Text do React Native: a cor depende do fundo do contador, não de um `tone`. */}
-          <RNText
-            className={cn(
-              'font-sans-semibold text-xs',
-              selected ? 'text-primary-foreground' : 'text-foreground',
-            )}
-          >
-            {count}
-          </RNText>
-        </View>
+          {count}
+        </Text>
       )}
     </Pressable>
   );

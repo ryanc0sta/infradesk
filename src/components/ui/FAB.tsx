@@ -11,7 +11,10 @@ export type FABProps = Omit<PressableProps, 'children'> & {
   className?: string;
 };
 
-/** Botão flutuante redondo (ex.: "Novo chamado"), fixo no canto inferior direito. */
+/**
+ * Botão flutuante da ação principal da tela (ex.: "Novo chamado"), fixo no canto inferior direito.
+ * É o único elemento com sombra: ele realmente flutua sobre a lista.
+ */
 export function FAB({ icon: Icon = Plus, className, ...props }: FABProps) {
   const colors = useThemeColors();
 
@@ -19,12 +22,12 @@ export function FAB({ icon: Icon = Plus, className, ...props }: FABProps) {
     <Pressable
       accessibilityRole="button"
       className={cn(
-        'absolute bottom-6 right-6 h-16 w-16 items-center justify-center rounded-full bg-accent shadow-lg active:opacity-80',
+        'absolute bottom-4 right-4 h-14 w-14 items-center justify-center rounded-2xl bg-primary shadow-md active:opacity-80',
         className,
       )}
       {...props}
     >
-      <Icon size={28} color={colors['primary-foreground']} />
+      <Icon size={24} color={colors['primary-foreground']} />
     </Pressable>
   );
 }

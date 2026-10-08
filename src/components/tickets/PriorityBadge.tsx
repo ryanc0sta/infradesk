@@ -78,16 +78,14 @@ export function PriorityBadge({ priority, variant = 'plain', className }: Priori
       accessibilityLabel={`Prioridade: ${label}`}
       className={cn(
         'flex-row items-center gap-1 self-start',
-        isSolid && 'rounded-full px-3 py-1.5 shadow-sm',
+        isSolid && 'rounded-md px-2 py-1',
         isSolid && solid.container,
         className,
       )}
     >
-      <Icon size={14} color={colors[style.color]} strokeWidth={2.5} />
+      <Icon size={13} color={colors[style.color]} strokeWidth={2.25} />
       {/* Text do React Native, e não o de `ui/`: a cor aqui vem da prioridade, não de um `tone`. */}
-      <Text className={cn('font-sans-semibold text-xs uppercase tracking-wide', style.text)}>
-        {label}
-      </Text>
+      <Text className={cn('font-sans-medium text-xs', style.text)}>{label}</Text>
     </View>
   );
 }

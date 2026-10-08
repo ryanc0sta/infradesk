@@ -17,10 +17,10 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView edges={['top']} className="flex-1 bg-background">
-      <ScrollView contentContainerClassName="gap-6 p-6">
+      <ScrollView contentContainerClassName="gap-5 p-4">
         <Text variant="display">Perfil</Text>
 
-        <Card className="flex-row items-center gap-4">
+        <Card className="flex-row items-center gap-3">
           <Avatar name={profile.full_name} uri={profile.avatar_url} size="lg" />
           <View className="flex-1 gap-0.5">
             <Text variant="subtitle">{profile.full_name}</Text>

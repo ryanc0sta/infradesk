@@ -7,9 +7,10 @@ import { useThemeColors } from '@/theme/useThemeColors';
 import { Text } from './Text';
 
 const tones = {
-  accent: { halo: 'bg-accent-soft', color: 'accent' },
-  success: { halo: 'bg-success-soft', color: 'success' },
-  error: { halo: 'bg-status-rejected', color: 'error' },
+  // O ícone leva a cor; o quadrado atrás dele é sempre neutro.
+  accent: { halo: 'bg-surface-muted', color: 'foreground' },
+  success: { halo: 'bg-surface-muted', color: 'success' },
+  error: { halo: 'bg-surface-muted', color: 'error' },
 } as const;
 
 export type StatCardProps = {
@@ -31,17 +32,16 @@ export function StatCard({ icon: Icon, value, label, tone = 'accent', className 
     <View
       accessible
       accessibilityLabel={`${label}: ${value}`}
-      className={cn(
-        'gap-3 rounded-4xl border border-border/70 bg-surface p-5 shadow-sm',
-        className,
-      )}
+      className={cn('gap-3 rounded-xl border border-border bg-surface p-4', className)}
     >
-      <View className={cn('h-10 w-10 items-center justify-center rounded-2xl', style.halo)}>
-        <Icon size={20} color={colors[style.color]} />
+      <View className={cn('h-8 w-8 items-center justify-center rounded-lg', style.halo)}>
+        <Icon size={16} color={colors[style.color]} />
       </View>
       <View className="gap-0.5">
-        <Text variant="display">{value}</Text>
-        <Text variant="label" tone="muted">
+        <Text variant="display" tabular>
+          {value}
+        </Text>
+        <Text variant="caption" tone="muted">
           {label}
         </Text>
       </View>

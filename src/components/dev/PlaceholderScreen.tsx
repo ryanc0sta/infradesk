@@ -23,15 +23,15 @@ export function PlaceholderScreen({
   const colors = useThemeColors();
 
   return (
-    <View className="flex-1 items-center justify-center gap-4 bg-background p-6">
-      <View className="h-16 w-16 items-center justify-center rounded-full bg-accent-soft">
-        <Icon size={28} color={colors.accent} />
+    <View className="flex-1 items-center justify-center gap-3 bg-background p-6">
+      <View className="h-12 w-12 items-center justify-center rounded-xl bg-surface-muted">
+        <Icon size={22} color={colors['muted-foreground']} />
       </View>
       <View className="items-center gap-1">
         <Text variant="title" className="text-center">
           {title}
         </Text>
-        <Text tone="muted" className="text-center">
+        <Text variant="label" tone="muted" className="text-center">
           {description}
         </Text>
       </View>

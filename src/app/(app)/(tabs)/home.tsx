@@ -25,18 +25,20 @@ export default function HomeScreen() {
   const firstName = profile?.full_name.split(' ')[0] ?? '';
 
   const header = (
-    <View className="gap-6 pb-4">
-      <View className="gap-1">
+    <View className="gap-4 pb-3">
+      <View className="gap-0.5">
         <Text variant="display">Olá, {firstName}</Text>
-        <Text tone="muted">Como podemos ajudar hoje?</Text>
+        <Text variant="label" tone="muted">
+          Como podemos ajudar hoje?
+        </Text>
       </View>
 
-      {/* -mx-6 e px-6: a fileira de filtros rola de ponta a ponta da tela, sem cortar na margem. */}
+      {/* -mx-4 e px-4: a fileira de filtros rola de ponta a ponta da tela, sem cortar na margem. */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-        className="-mx-6"
-        contentContainerClassName="gap-2 px-6"
+        className="-mx-4"
+        contentContainerClassName="gap-2 px-4"
       >
         {ticketFilters.map((item) => (
           <Chip
@@ -58,7 +60,7 @@ export default function HomeScreen() {
 
   // O que aparece no lugar da lista quando não há cards para mostrar.
   const empty = isPending ? (
-    <View className="gap-4" accessibilityLabel="Carregando chamados">
+    <View className="gap-2" accessibilityLabel="Carregando chamados">
       <TicketCardSkeleton />
       <TicketCardSkeleton />
       <TicketCardSkeleton />
@@ -97,8 +99,8 @@ export default function HomeScreen() {
         )}
         ListHeaderComponent={header}
         ListEmptyComponent={empty}
-        ItemSeparatorComponent={() => <View className="h-4" />}
-        contentContainerClassName="p-6 pb-32"
+        ItemSeparatorComponent={() => <View className="h-2" />}
+        contentContainerClassName="p-4 pb-24"
         refreshControl={
           <RefreshControl
             refreshing={isRefetching}

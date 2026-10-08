@@ -21,19 +21,27 @@ export function EmptyState({ icon: Icon, title, description, action, className }
   const colors = useThemeColors();
 
   return (
-    <View className={cn('items-center gap-3 px-6 py-10', className)}>
-      <View className="h-16 w-16 items-center justify-center rounded-full bg-accent-soft">
-        <Icon size={28} color={colors.accent} />
+    <View className={cn('items-center gap-2 px-6 py-8', className)}>
+      <View className="mb-1 h-12 w-12 items-center justify-center rounded-xl bg-surface-muted">
+        <Icon size={22} color={colors['muted-foreground']} />
       </View>
       <Text variant="subtitle" className="text-center">
         {title}
       </Text>
       {description ? (
-        <Text tone="muted" className="text-center">
+        <Text variant="label" tone="muted" className="text-center">
           {description}
         </Text>
       ) : null}
-      {action ? <Button title={action.label} onPress={action.onPress} className="mt-2" /> : null}
+      {action ? (
+        <Button
+          title={action.label}
+          onPress={action.onPress}
+          size="sm"
+          variant="secondary"
+          className="mt-3"
+        />
+      ) : null}
     </View>
   );
 }

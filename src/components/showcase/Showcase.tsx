@@ -89,7 +89,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 function Swatch({ name, className }: { name: string; className: string }) {
   return (
     <View className="w-24 items-center gap-1">
-      <View className={`h-12 w-12 rounded-2xl border border-border ${className}`} />
+      <View className={`h-10 w-10 rounded-lg border border-border ${className}`} />
       <Text variant="caption" tone="muted" numberOfLines={1}>
         {name}
       </Text>
@@ -105,8 +105,8 @@ export function Showcase() {
 
   return (
     <View className="flex-1 bg-background">
-      <ScrollView contentContainerClassName="gap-8 p-6 pb-32">
-        <Section title="Cores — rampa quente">
+      <ScrollView contentContainerClassName="gap-6 p-4 pb-24">
+        <Section title="Cores">
           <Card className="gap-4">
             <View className="flex-row flex-wrap gap-2">
               {ramp.map((item) => (
@@ -114,7 +114,7 @@ export function Showcase() {
               ))}
             </View>
             <Text variant="caption" tone="muted">
-              Fora da rampa, só com significado fixo: sucesso e erro.
+              Semânticas, só em elementos pequenos: sucesso e erro.
             </Text>
             <View className="flex-row gap-2">
               {exceptions.map((item) => (
@@ -165,7 +165,7 @@ export function Showcase() {
             <IconButton icon={ArrowLeft} accessibilityLabel="Voltar" />
             <IconButton icon={SlidersHorizontal} variant="soft" accessibilityLabel="Filtrar" />
             {/* O fundo escuro simula uma foto, onde a variante `overlay` é usada. */}
-            <View className="rounded-2xl bg-muted-foreground p-2">
+            <View className="rounded-lg bg-muted-foreground p-2">
               <IconButton icon={X} variant="overlay" accessibilityLabel="Fechar" />
             </View>
             <IconButton icon={Bell} accessibilityLabel="Alertas" disabled />
@@ -293,7 +293,7 @@ export function Showcase() {
 
         <Section title="Carregando">
           <Card className="flex-row items-center gap-3">
-            <Skeleton className="h-12 w-12 rounded-2xl" />
+            <Skeleton className="h-12 w-12 rounded-lg" />
             <View className="flex-1 gap-2">
               <Skeleton className="h-4 w-3/4" />
               <Skeleton className="h-3 w-1/2" />

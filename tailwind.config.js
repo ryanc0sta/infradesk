@@ -5,15 +5,6 @@ const themeColors = require('./src/theme/colors');
 /** Cria uma cor que lê a variável CSS `--color-<name>` e aceita opacidade (`bg-primary/50`). */
 const token = (name) => `rgb(var(--color-${name}) / <alpha-value>)`;
 
-/** Gera o par `<nome>` (fundo) e `<nome>-foreground` (texto) para cada chave. */
-const pairs = (prefix, keys) =>
-  Object.fromEntries(
-    keys.flatMap((key) => [
-      [key, token(`${prefix}-${key}`)],
-      [`${key}-foreground`, token(`${prefix}-${key}-foreground`)],
-    ]),
-  );
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   // Arquivos onde o Tailwind procura classes usadas em `className`.
@@ -30,10 +21,6 @@ module.exports = {
         'sans-medium': ['Inter_500Medium'],
         'sans-semibold': ['Inter_600SemiBold'],
         'sans-bold': ['Inter_700Bold'],
-      },
-      // Cantos dos cards do protótipo (28 px); botões e chips usam rounded-full (pílula).
-      borderRadius: {
-        '4xl': '28px',
       },
       // Tokens semânticos (docs/design.md, seção 3). Use estes nomes em vez de cores da paleta.
       colors: {
@@ -69,10 +56,16 @@ module.exports = {
         danger: {
           DEFAULT: token('danger'),
           foreground: token('danger-foreground'),
+          soft: token('danger-soft'),
         },
         error: token('error'),
-        // bg-status-open + text-status-open-foreground, etc. (nomes do enum ticket_status)
-        status: pairs('status', ['open', 'in-review', 'in-progress', 'done', 'rejected']),
+        // Ponto colorido do StatusBadge: bg-status-open-dot, etc. (nomes do enum ticket_status)
+        status: Object.fromEntries(
+          ['open', 'in-review', 'in-progress', 'done', 'rejected', 'cancelled'].map((key) => [
+            `${key}-dot`,
+            token(`status-${key}-dot`),
+          ]),
+        ),
         // Selo sólido: bg-priority-high + text-priority-high-foreground.
         // Sem fundo: text-priority-high-text. (nomes do enum ticket_priority)
         priority: Object.fromEntries(
