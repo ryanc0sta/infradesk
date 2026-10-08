@@ -1,9 +1,10 @@
-import { router } from 'expo-router';
-import { LogOut, Palette } from 'lucide-react-native';
-import { View } from 'react-native';
+import { LogOut } from 'lucide-react-native';
+import { ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { DevMenu } from '@/components/dev/DevMenu';
 import { Avatar, Button, Card, Text } from '@/components/ui';
+import { devMenuEnabled } from '@/lib/config';
 import { roleLabels } from '@/lib/roles';
 import { useSession } from '@/lib/session';
 
@@ -16,7 +17,7 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView edges={['top']} className="flex-1 bg-background">
-      <View className="flex-1 gap-6 p-6">
+      <ScrollView contentContainerClassName="gap-6 p-6">
         <Text variant="display">Perfil</Text>
 
         <Card className="flex-row items-center gap-4">
@@ -29,16 +30,10 @@ export default function ProfileScreen() {
           </View>
         </Card>
 
-        <View className="gap-3">
-          <Button
-            title="Ver a vitrine de componentes"
-            variant="secondary"
-            icon={Palette}
-            onPress={() => router.push('/showcase')}
-          />
-          <Button title="Sair da conta" variant="destructive" icon={LogOut} onPress={signOut} />
-        </View>
-      </View>
+        {devMenuEnabled ? <DevMenu /> : null}
+
+        <Button title="Sair da conta" variant="destructive" icon={LogOut} onPress={signOut} />
+      </ScrollView>
     </SafeAreaView>
   );
 }
