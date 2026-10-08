@@ -52,7 +52,8 @@ export function Button({
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityState={{ disabled: isDisabled, busy: loading }}
+      aria-disabled={isDisabled}
+      aria-busy={loading}
       disabled={isDisabled}
       hitSlop={dimensions.hitSlop}
       className={cn(
