@@ -4,11 +4,11 @@ import { cn } from '@/lib/cn';
 
 export type CardProps = ViewProps & { className?: string };
 
-/** Superfície com cantos de 16 px (`rounded-2xl`), borda e sombra suaves. */
+/** Superfície branca com cantos de 28 px (`rounded-4xl`), borda e sombra suaves. */
 export function Card({ className, ...props }: CardProps) {
   return (
     <View
-      className={cn('rounded-2xl border border-border bg-surface p-4 shadow-sm', className)}
+      className={cn('rounded-4xl border border-border/70 bg-surface p-5 shadow-sm', className)}
       {...props}
     />
   );

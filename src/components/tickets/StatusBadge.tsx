@@ -23,10 +23,11 @@ const statuses = {
     container: 'bg-status-rejected',
     text: 'text-status-rejected-foreground',
   },
+  // Sem fundo: só contorno e texto apagado, para se diferenciar de "Aberto" pela forma.
   cancelled: {
     label: 'Cancelado',
-    container: 'bg-status-cancelled',
-    text: 'text-status-cancelled-foreground',
+    container: 'border border-border',
+    text: 'text-muted-foreground',
   },
 } satisfies Record<TicketStatus, { label: string; container: string; text: string }>;
 
@@ -35,7 +36,10 @@ export type StatusBadgeProps = {
   className?: string;
 };
 
-/** Etiqueta em pílula com o status do chamado, na cor do status (docs/design.md, seção 3). */
+/**
+ * Selo em pílula com o status do chamado. As cores seguem a rampa quente e ficam mais intensas
+ * conforme o chamado avança (docs/design.md, seção 3).
+ */
 export function StatusBadge({ status, className }: StatusBadgeProps) {
   const style = statuses[status];
 
@@ -43,10 +47,12 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
     <View
       accessible
       accessibilityLabel={`Status: ${style.label}`}
-      className={cn('self-start rounded-full px-2.5 py-1', style.container, className)}
+      className={cn('self-start rounded-full px-3 py-1', style.container, className)}
     >
       {/* Text do React Native, e não o de `ui/`: a cor aqui vem do status, não de um `tone`. */}
-      <Text className={cn('font-sans-medium text-xs', style.text)}>{style.label}</Text>
+      <Text className={cn('font-sans-semibold text-xs uppercase tracking-wide', style.text)}>
+        {style.label}
+      </Text>
     </View>
   );
 }

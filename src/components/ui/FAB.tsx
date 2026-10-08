@@ -19,12 +19,12 @@ export function FAB({ icon: Icon = Plus, className, ...props }: FABProps) {
     <Pressable
       accessibilityRole="button"
       className={cn(
-        'absolute bottom-6 right-6 h-14 w-14 items-center justify-center rounded-full bg-primary shadow-lg active:opacity-80',
+        'absolute bottom-6 right-6 h-16 w-16 items-center justify-center rounded-full bg-accent shadow-lg active:opacity-80',
         className,
       )}
       {...props}
     >
-      <Icon size={26} color={colors['primary-foreground']} />
+      <Icon size={28} color={colors['primary-foreground']} />
     </Pressable>
   );
 }
