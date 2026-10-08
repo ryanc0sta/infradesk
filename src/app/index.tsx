@@ -4,6 +4,7 @@ import { useColorScheme } from 'nativewind';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import { PriorityBadge, StatusBadge } from '@/components/tickets';
 import {
   Avatar,
   Button,
@@ -15,7 +16,17 @@ import {
   Skeleton,
   Text,
 } from '@/components/ui';
+import type { TicketPriority, TicketStatus } from '@/types/ticket';
 
+const statuses: TicketStatus[] = [
+  'open',
+  'in_review',
+  'in_progress',
+  'done',
+  'rejected',
+  'cancelled',
+];
+const priorities: TicketPriority[] = ['low', 'medium', 'high', 'critical'];
 const filters = ['Todos', 'Abertos', 'Em andamento', 'Concluídos'];
 
 // Demonstração provisória dos componentes base (#6). A vitrine definitiva é a issue #8.
@@ -76,6 +87,21 @@ export default function HomeScreen() {
             ))}
           </View>
         </View>
+
+        <Card className="gap-3">
+          <Text variant="subtitle">Status</Text>
+          <View className="flex-row flex-wrap gap-2">
+            {statuses.map((status) => (
+              <StatusBadge key={status} status={status} />
+            ))}
+          </View>
+          <Text variant="subtitle">Prioridades</Text>
+          <View className="flex-row flex-wrap gap-4">
+            {priorities.map((priority) => (
+              <PriorityBadge key={priority} priority={priority} />
+            ))}
+          </View>
+        </Card>
 
         <Card className="flex-row items-center gap-3">
           <Avatar name="Maria da Silva" size="sm" />
