@@ -7,6 +7,7 @@ export { FAB } from './FAB';
 export { IconButton } from './IconButton';
 export { Input } from './Input';
 export { ListGroup, ListItem } from './ListItem';
+export { Photo } from './Photo';
 export { ProgressBar } from './ProgressBar';
 export { SectionHeader } from './SectionHeader';
 export { Skeleton } from './Skeleton';

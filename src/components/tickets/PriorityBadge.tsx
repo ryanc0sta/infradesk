@@ -2,6 +2,7 @@ import { AlertTriangle, ArrowDown, ArrowUp, type LucideIcon, Minus } from 'lucid
 import { Text, View } from 'react-native';
 
 import { cn } from '@/lib/cn';
+import { priorityLabels } from '@/lib/ticket-labels';
 import { type ColorToken, useThemeColors } from '@/theme/useThemeColors';
 import type { TicketPriority } from '@/types/ticket';
 
@@ -9,7 +10,6 @@ import type { TicketPriority } from '@/types/ticket';
 // Cada prioridade tem UM ícone e UMA cor, iguais em todas as telas.
 const priorities = {
   low: {
-    label: 'Baixa',
     icon: ArrowDown,
     plain: { text: 'text-priority-low-text', color: 'priority-low-text' },
     solid: {
@@ -19,7 +19,6 @@ const priorities = {
     },
   },
   medium: {
-    label: 'Média',
     icon: Minus,
     plain: { text: 'text-priority-medium-text', color: 'priority-medium-text' },
     solid: {
@@ -29,7 +28,6 @@ const priorities = {
     },
   },
   high: {
-    label: 'Alta',
     icon: ArrowUp,
     plain: { text: 'text-priority-high-text', color: 'priority-high-text' },
     solid: {
@@ -39,7 +37,6 @@ const priorities = {
     },
   },
   critical: {
-    label: 'Crítica',
     icon: AlertTriangle,
     plain: { text: 'text-priority-critical-text', color: 'priority-critical-text' },
     solid: {
@@ -51,7 +48,6 @@ const priorities = {
 } satisfies Record<
   TicketPriority,
   {
-    label: string;
     icon: LucideIcon;
     plain: { text: string; color: ColorToken };
     solid: { container: string; text: string; color: ColorToken };
@@ -71,7 +67,8 @@ export type PriorityBadgeProps = {
 /** Prioridade do chamado: sempre ícone + texto, nunca só a cor (docs/design.md, seção 3). */
 export function PriorityBadge({ priority, variant = 'plain', className }: PriorityBadgeProps) {
   const colors = useThemeColors();
-  const { label, icon: Icon, plain, solid } = priorities[priority];
+  const { icon: Icon, plain, solid } = priorities[priority];
+  const label = priorityLabels[priority];
   const isSolid = variant === 'solid';
   const style = isSolid ? solid : plain;
 
