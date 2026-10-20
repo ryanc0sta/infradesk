@@ -11,6 +11,12 @@ const variants = {
   primary: { container: 'bg-primary', tone: 'inverse', color: 'primary-foreground' },
   secondary: { container: 'border border-border bg-surface', tone: 'default', color: 'foreground' },
   ghost: { container: '', tone: 'brand', color: 'brand' },
+  // Para fundos sempre escuros (câmera, fotos): fundo claro translúcido e texto branco.
+  overlay: {
+    container: 'bg-overlay-foreground/15',
+    tone: 'inverse',
+    color: 'overlay-foreground',
+  },
   // Contorno e texto vermelhos sobre um fundo suave: avisa sem gritar.
   destructive: {
     container: 'border border-error/25 bg-danger-soft',

@@ -7,8 +7,12 @@ export default function AppLayout() {
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="tickets/[id]" options={{ title: 'Chamado' }} />
-      {/* `presentation: 'modal'` faz a tela subir por cima das abas, em vez de entrar de lado. */}
-      <Stack.Screen name="tickets/new" options={{ title: 'Novo chamado', presentation: 'modal' }} />
+      {/* O novo chamado sobe por cima das abas e ocupa a tela inteira (a câmera precisa dela).
+          No Android, `fullScreenModal` vira um modal comum. */}
+      <Stack.Screen
+        name="tickets/new"
+        options={{ headerShown: false, presentation: 'fullScreenModal' }}
+      />
       <Stack.Screen name="scan" options={{ title: 'Escanear QR Code', presentation: 'modal' }} />
     </Stack>
   );
