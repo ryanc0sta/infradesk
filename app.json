@@ -22,6 +22,27 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-router", "expo-status-bar", "expo-font", "expo-splash-screen"]
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-font",
+      "expo-splash-screen",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "O InfraDesk usa a câmera para você fotografar o problema que quer relatar.",
+          "microphonePermission": false,
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O InfraDesk acessa suas fotos para você anexar imagens do problema.",
+          "cameraPermission": "O InfraDesk usa a câmera para você fotografar o problema que quer relatar.",
+          "microphonePermission": false
+        }
+      ]
+    ]
   }
 }
